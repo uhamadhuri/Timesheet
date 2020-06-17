@@ -1,0 +1,231 @@
+<html>
+    <head>
+        <title>TimeSheet</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+         <style>
+             body{
+                 background-color: white;
+             }
+            .header{
+                background-image: url(bg.jpg);
+                text-align: center;
+                
+            }
+            .iconpreweek{
+                border-right: 1px solid #ccc;
+                margin: 0 10px 0;
+                height: 32px;
+                 width: 32px;
+                 float: left;
+            }
+            .pannelweekpicker select{
+                float: left;
+                margin: 4px 0 0;
+                width: 245px;
+            }
+             select{
+                 height: 24px;
+                 padding: 0;
+             }
+             .iconnextweek{
+                 background-position: 50% -17px;
+                 border-left: 1px solid #ccc;
+                 float: right;
+                 height: 32px;
+                 width: 32px;
+             }
+        </style>
+        </head>
+        <body>
+            <div class="header">
+               <h1 class="text-white"> TimeSheet</h1>
+            </div>
+            <div class="container">
+                <table class="gridfullview" id="dategrid" border="0" cellspacing="0" cellpadding="0">
+                    <tbody>
+                        <th style="border:currentColor; border-image:none;width:366px; background-color:white;" rowspan="2">
+                        <div class="pannelweekpicker">
+                            <span class="left">
+                                <a class="iconpreweek" href="#"><img src="i1.png" width="20" height="20"></a>
+                            </span>
+                            <select id="dropdowmlist">
+                                <option id="select">Choose dates</option>
+                                <option class="p" value="1">13 Apr 2020-19 Apr 2020</option>
+                                <option class="p" value="2">20 Apr 2020-26 Apr 2020</option>
+                                <option class="p" value="3">27 Apr 2020-03 May 2020</option>
+                                <option class="p" value="4">04 May 2020-10 May 2020</option>
+                                <option class="p" value="5">11 May 2020-17 May 2020</option>
+                                <option class="p" value="6">18 May 2020-31 May 2020</option>
+                                <option class="p" value="7">01 June 2020-07 June 2020</option>
+                            </select>
+                            <span><a href="#" class="iconnextweek"><img src="i2.png" width="30" height="30"></a></span>
+                        </div>
+                        </th>
+                    </tbody>
+                </table>
+            
+              <span> <h3> <a  href="#" id="addtask" data-toggle="modal" data-target="#exampleModal">
+                    Add task
+                </a></h3></span>
+                <span> <a href="sample.html">Week update</a></span>
+                <div class="modal fade " id="exampleModal" tabindex="-1" data-toggle="modal" data-target="#myModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl" id='mode'>
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Timesheet update</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                
+                                <div class="form-group">
+                                  <label>Activity Description</label>
+                                  <input type="text" name="name" class="form-control" value="Description" required="">
+                                </div>
+                                
+                                <div class="form-group">
+                                  <label>Duration</label>
+                                  <input type="number" name="time" class="form-control" value="Duration" required="">
+                                </div>
+                                <div class="form-group">
+                                    <label>Website</label>
+                                    <input type="text" name="site" class="form-control" value="website" required="">
+                                </div>
+                                <div class="form-group">
+                                    <label>Start Date</label>
+                                    <input type="date" name="date1" class="form-control" value="start" required="">
+                                </div>
+                                <div class="form-group">
+                                    <label>End Date</label>
+                                    <input type="date" name="date2" class="form-control" value="end" required="">
+                                </div>
+                               
+                                <button type="submit" class="btn btn-success save-btn">Save</button>
+                                
+                              </form> 
+                              
+                          
+                        </div>
+                      </div>
+                      </div>
+                      </div>
+                      <table class="table table-bordered data-table">
+                        <thead>
+                            <th>Training Description</th>
+                            <th>Hours</th>
+                            <th>Website</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                          <th width="400px" class="text-center">Action</th>
+                          
+                        </thead>
+                        <tbody>
+                          
+                        </tbody>
+                      </table>
+                       
+                      
+                      
+                   
+                    
+                  
+            </div>
+                    <script>
+                        
+                        $("form").submit(function(e){
+        e.preventDefault();
+        var name = $("input[name='name']").val();
+        var time = $("input[name='time']").val();
+        var site=$("input[name='site']").val();
+        var date1=$("input[name='date1']").val();
+        var date2=$("input[name='date2']").val();
+     
+        $(".data-table tbody").append("<tr data-name='"+name+"' data-time='"+time+"' data-site='"+site+"' data-date1='"+date1+"' data-date2='"+date2+"'><td>"+name+"</td><td>"+time+"</td><td>"+site+"</td><td>"+date1+"</td><td>"+date2+"</td><td><button class='btn btn-info btn-xl p-2 btn-edit mr-3'>Edit</button><button class='btn btn-danger btn-xl btn-delete'>Delete</button></td></tr>");
+    
+        $("input[name='name']").val('');
+        $("input[name='time']").val('');
+        $("input[name='site']").val('');
+        $("input[name='date1']").val('');
+        $("input[name='date2']").val('');
+    });
+   
+    $("body").on("click", ".btn-delete", function(){
+        $(this).parents("tr").remove();
+    });
+    
+    $("body").on("click", ".btn-edit", function(){
+        var name = $(this).parents("tr").attr('data-name');
+        var time = $(this).parents("tr").attr('data-time');
+        var site = $(this).parents("tr").attr('data-site');
+        var date1 = $(this).parents("tr").attr('data-date1');
+        var date2 = $(this).parents("tr").attr('data-date2');
+    
+        $(this).parents("tr").find("td:eq(0)").html('<input name="edit_name" value="'+name+'">');
+        $(this).parents("tr").find("td:eq(1)").html('<input name="edit_time" value="'+time+'">');
+        $(this).parents("tr").find("td:eq(2)").html('<input name="edit_site" value="'+site+'">');
+        $(this).parents("tr").find("td:eq(3)").html('<input name="edit_date1" value="'+date1+'">');
+        $(this).parents("tr").find("td:eq(4)").html('<input name="edit_date2" value="'+date2+'">');
+    
+        $(this).parents("tr").find("td:eq(5)").prepend("<span><button class='btn btn-info btn-xl btn-update'>Update</button></span><span><button class='btn btn-warning btn-xl btn-cancel'>Cancel</button></span>")
+        $(this).hide();
+
+    });
+   
+    $("body").on("click", ".btn-cancel", function(){
+        var name = $(this).parents("tr").attr('data-name');
+        var time = $(this).parents("tr").attr('data-time');
+        var site = $(this).parents("tr").attr('data-site');
+        var date1 = $(this).parents("tr").attr('data-date1');
+        var date2 = $(this).parents("tr").attr('data-date2');
+    
+        $(this).parents("tr").find("td:eq(0)").text(name);
+        $(this).parents("tr").find("td:eq(1)").text(time);
+        $(this).parents("tr").find("td:eq(2)").text(site);
+        $(this).parents("tr").find("td:eq(3)").text(date1);
+        $(this).parents("tr").find("td:eq(4)").text(date2);
+   
+        $(this).parents("tr").find(".btn-edit").show();
+        $(this).parents("tr").find(".btn-update").remove();
+        $(this).parents("tr").find(".btn-cancel").remove();
+    });
+   
+    $("body").on("click", ".btn-update", function(){
+        var name = $(this).parents("tr").find("input[name='edit_name']").val();
+        var time = $(this).parents("tr").find("input[name='edit_time']").val();
+        var site = $(this).parents("tr").find("input[name='edit_site']").val();
+        var date1 = $(this).parents("tr").find("input[name='edit_date1']").val();
+        var date2 = $(this).parents("tr").find("input[name='edit_date2']").val();
+    
+        $(this).parents("tr").find("td:eq(0)").text(name);
+        $(this).parents("tr").find("td:eq(1)").text(time);
+        $(this).parents("tr").find("td:eq(2)").text(site);
+        $(this).parents("tr").find("td:eq(3)").text(date1);
+        $(this).parents("tr").find("td:eq(4)").text(date2);
+
+     
+        $(this).parents("tr").attr('data-name', name);
+        $(this).parents("tr").attr('data-time', time);
+        $(this).parents("tr").attr('data-site', site);
+        $(this).parents("tr").attr('data-date1', date1);
+        $(this).parents("tr").attr('data-date2', date2);
+    
+        $(this).parents("tr").find(".btn-edit").show();
+        $(this).parents("tr").find(".btn-cancel").remove();
+        $(this).parents("tr").find(".btn-update").remove();
+
+       
+    });
+    
+    
+    
+
+                    </script>
+
+                <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+                    </body>
+    </html>
